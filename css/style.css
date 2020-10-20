@@ -55,7 +55,7 @@ h1 {
 }
 .main-wthree-row {
     width: 25%;
-    margin: 2em auto;
+    margin: 1em auto auto;
     background: rgba(0, 0, 0, 0.34);
     background-size: cover; 
     padding: 2em;
