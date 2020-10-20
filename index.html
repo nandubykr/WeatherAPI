@@ -74,7 +74,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								// skyConIcon.play();
 
 								var imgCode=weatherData.weather[0].icon;
-								var imgUrl=" http://openweathermap.org/img/wn/"+imgCode+"@2x.png";
+								var imgUrl=" https://openweathermap.org/img/wn/"+imgCode+"@2x.png";
 								$("#imgIcon").attr("src",imgUrl);
 
 								coord=weatherData.coord.lat+","+weatherData.coord.lon;
@@ -118,7 +118,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							$("#weatherDesc").text(weatherData.weather[0].description);
 
 							var imgCode=weatherData.weather[0].icon;
-							var imgUrl=" http://openweathermap.org/img/wn/"+imgCode+"@2x.png";
+							var imgUrl=" https://openweathermap.org/img/wn/"+imgCode+"@2x.png";
 							$("#imgIcon").attr("src",imgUrl);
 
 							// var weatherDes=weatherData.weather[0].description;
