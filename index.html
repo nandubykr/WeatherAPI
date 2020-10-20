@@ -1,0 +1,241 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Weather Forecast</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="Weather Report Widget template Responsive, Login form web template,Flat Pricing tables,Flat Drop downs  Sign up Web Templates, Flat Web Templates, Login sign up Responsive web template, SmartPhone Compatible web template, free web designs for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js" integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf" crossorigin="anonymous"></script>
+		<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+		<!-- Bootstrap-->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+		<!-- Custom Theme files -->
+		<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+		<link href="css/owl.carousel.css" rel="stylesheet" type="text/css" media="all">
+		<!-- Favicon --> 
+		<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+		<!-- //Custom Theme files -->
+		<!-- js -->
+		<script src="js/jquery-2.2.3.min.js"></script> 
+		<script src="js/owl.carousel.js"></script>
+		<script>
+			$(document).ready(function() {
+				var city=""; 
+				var apiKey="ff7ff3b2df3d78bd304b966c710c85c3";
+				var unit="metric";
+				var coord="";
+				$("#owl-demo").owlCarousel({ 
+				autoPlay: 3000, //Set AutoPlay to 3 seconds
+			
+				items : 3,
+				itemsDesktop : [768,3],
+				itemsDesktopSmall : [414,4]
+
+				});
+
+				$.ajax({
+					url: "https://geolocation-db.com/json/",
+					method:"GET",
+					dataType: "json",
+					success: function(location) {
+						var jsonData=JSON.stringify(location);
+						var locData=JSON.parse(jsonData);
+						$("#city").text(locData.city);
+						$("#country").text(locData.country_code);
+						city=locData.city+","+locData.country_code;
+						$.ajax({
+							url:"https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid="+apiKey+"&units="+unit,
+							method:"GET",
+							success:function(data1){
+								var jsonData1=JSON.stringify(data1);
+								var weatherData=JSON.parse(jsonData1);
+								//console.log(weatherData);
+								$("#temp").text(Math.round(weatherData.main.temp)+"°C");
+								$("#feelsLike").text(Math.round(weatherData.main.feels_like)+"°C");
+								$("#city").text(weatherData.name);
+								$("#country").text(weatherData.sys.country);
+								$("#weatherDesc").text(weatherData.weather[0].description);
+
+								// var weatherDes=weatherData.weather[0].description;
+								// var splitDesc=weatherDes.split(" ");
+								// var splitWDes=(splitDesc[0]+"_"+splitDesc[1]);
+								// var skyConIcon=new Skycons({"color": "#fff"});
+								// skyConIcon.add("icon",Skycons.PARTLY_CLOUDY_DAY);
+								// skyConIcon.play();
+
+								var imgCode=weatherData.weather[0].icon;
+								var imgUrl=" http://openweathermap.org/img/wn/"+imgCode+"@2x.png";
+								$("#imgIcon").attr("src",imgUrl);
+
+								coord=weatherData.coord.lat+","+weatherData.coord.lon;
+								console.log(coord);
+								$.ajax({
+									url:"https://dev.virtualearth.net/REST/v1/TimeZone/"+coord+"?&key=AsC1ElsgKQeOUhX-pirfzwkRwiGRJ5mPnv2onzBr2tTLSpsDUPLpZPwb3DlkDz0M",
+									method:"GET",
+									success:function(timeData){
+										var jsonData3=JSON.stringify(timeData);
+										var parsedData=JSON.parse(jsonData3);
+										//console.log(parsedData);
+										var dateString=parsedData.resourceSets[0].resources[0].timeZone.convertedTime.localTime;
+										var dayArray=new Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday");
+										var dayOfWeek=new Date(dateString).getDay();
+										var localDate=new Date(dateString).toLocaleString();
+										$("#day").text(dayArray[dayOfWeek]);
+										$("#date").text(localDate);
+									}
+
+								});
+							}
+						});
+  					}
+				});				
+				
+				
+
+				$("#searchCity").click(function(){
+					city=$("#cityName").val();
+					$.ajax({
+						url:"https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid="+apiKey+"&units="+unit,
+						method:"GET",
+						success:function(data2){
+							var jsonData2=JSON.stringify(data2);
+							var weatherData=JSON.parse(jsonData2);
+							//console.log(weatherData);
+							$("#temp").text(Math.round(weatherData.main.temp)+"°C");
+							$("#feelsLike").text(Math.round(weatherData.main.feels_like)+"°C");
+							$("#city").text(weatherData.name);
+							$("#country").text(weatherData.sys.country);
+							$("#weatherDesc").text(weatherData.weather[0].description);
+
+							var imgCode=weatherData.weather[0].icon;
+							var imgUrl=" http://openweathermap.org/img/wn/"+imgCode+"@2x.png";
+							$("#imgIcon").attr("src",imgUrl);
+
+							// var weatherDes=weatherData.weather[0].description;
+							// var splitDesc=weatherDes.split("");
+							// var splitWDes=(splitDesc[0]+"_"+splitDesc[1]);
+							// var skyConIcon=new Skycons({"color": "#fff"});
+							// skyConIcon.add("icon",Skycons.splitWDes);
+							// skyConIcon.play();
+
+							coord=weatherData.coord.lat+","+weatherData.coord.lon;
+								console.log(coord);
+								$.ajax({
+									url:"https://dev.virtualearth.net/REST/v1/TimeZone/"+coord+"?&key=AsC1ElsgKQeOUhX-pirfzwkRwiGRJ5mPnv2onzBr2tTLSpsDUPLpZPwb3DlkDz0M",
+									method:"GET",
+									success:function(timeData){
+										var jsonData3=JSON.stringify(timeData);
+										var parsedData=JSON.parse(jsonData3);
+										//console.log(parsedData);
+										var dateString=parsedData.resourceSets[0].resources[0].timeZone.convertedTime.localTime;
+										var dayArray=new Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday");
+										var dayOfWeek=new Date(dateString).getDay();
+										var localDate=new Date(dateString).toLocaleString();
+										$("#day").text(dayArray[dayOfWeek]);
+										$("#date").text(localDate);
+									}
+
+								});
+						}
+					})
+				})
+			}); 
+		</script> 
+		<!-- sky icons -->
+		<script src="js/skycons.js"></script>
+		<!-- //sky icons -->
+		<!-- //js -->
+		<!-- web font -->
+		<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+		<!-- //web font -->
+	</head>
+<body>
+	<!-- main -->
+	<div class="main-agileits">
+		<h1>Weather</h1>
+		<div>
+			<form class="form-inline my-2 my-lg-0 form-signin" action="" method="POST">
+				<input id="cityName" class="form-control mr-sm-2" type="text" placeholder="City" aria-label="City" required autocomplete="off">
+				<button id="searchCity" class="btn btn-primary my-2 my-sm-0" type="button">Go</button>
+			  </form>
+		</div>
+		<div class="main-wthree-row"> 
+			<div class="agileinfo-text"> 
+				<div class="date">
+					<p><span id="day"></span></p>
+					<p><span id="date"></span></p>
+				</div>
+				<h2 id="temp">14°C</h2>
+				<div>
+					<p style="color: white;">feels like&nbsp;<span id="feelsLike"></span></p>
+					<img style="height: 50px; width: 50px; display: inline-block;" id="imgIcon" src="" alt="" />
+					<p style="color: white; margin-top: 0;" id="weatherDesc">Rain Falling</p>
+				</div>
+				<h3><span id="city">San Francisco</span>,<span id="country">US</span></h3>	 
+			</div>
+			<!-- <div class="w3layouts-slider">
+				<div id="owl-demo" class="owl-carousel owl-theme">
+					<div class="item agile-item">
+						<canvas id="sleet" width="40" height="40"></canvas>
+						<h6>Thr</h6>
+					</div> 
+					<div class="item agile-item">
+						<canvas id="rain" width="40" height="40"></canvas>
+						<h6>Fri</h6>
+					</div> 
+					<div class="item agile-item">
+						<canvas id="partly-cloudy-day" width="40" height="40"></canvas> 
+						<h6>Sat</h6>
+					</div>  
+					<div class="item agile-item">
+						<canvas id="cloudy" width="40" height="40"></canvas>
+						<h6>Sun</h6>  
+					</div> 
+					<div class="item agile-item">
+						<canvas id="clear-night" width="40" height="40"></canvas>
+						<h6>Mon</h6>  
+					</div> 
+					<div class="item agile-item">
+						<canvas id="clear-day" width="40" height="40"></canvas>
+						<h6>Tue</h6> 
+					</div>  
+					<div class="item agile-item">
+						<canvas id="partly-cloudy-night" width="40" height="40"></canvas>
+						<h6>Wed</h6> 
+					</div> 
+				</div>
+				<script>
+					 var icons = new Skycons({"color": "#fff"}),
+						  list  = [
+							"clear-night","clear-day", "partly-cloudy-day",
+							"partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
+							"fog"
+						  ],
+						  i;
+
+					  for(i = list.length; i--; )
+						icons.set(list[i], list[i]);
+
+					  icons.play();
+				</script>
+			</div> -->
+		</div>	
+	</div>	
+	<!-- //main -->
+	<!-- copyrights -->  
+	<div class="copy-rights wthree">		 	
+		<p>© 2016 Weather Report Widget. All Rights Reserved | Design by <a href="http://w3layouts.com/" target="_blank">W3layouts</a> </p>		 	
+	</div>
+	<!-- //copyright -->
+</body>
+</html>
