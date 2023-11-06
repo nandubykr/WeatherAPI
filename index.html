@@ -50,8 +50,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					success: function(location) {
 						var jsonData=JSON.stringify(location);
 						var locData=JSON.parse(jsonData);
-						$("#city").text(locData.city);
-						$("#country").text(locData.country_code);
+						//$("#city").text(locData.city);
+						//$("#country").text(locData.country_code);
 						city=locData.city+","+locData.country_code;
 						$.ajax({
 							url:"https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid="+apiKey+"&units="+unit,
