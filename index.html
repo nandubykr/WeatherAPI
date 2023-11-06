@@ -61,7 +61,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								var weatherData=JSON.parse(jsonData1);
 								//console.log(weatherData);
 								$("#temp").text(Math.round(weatherData.main.temp)+"°C");
-								$("#feelsLike").text(Math.round(weatherData.main.feels_like)+"°C");
+								$("#feelsLike").text("feels like "+Math.round(weatherData.main.feels_like)+"°C");
 								$("#city").text(weatherData.name);
 								$("#country").text(weatherData.sys.country);
 								$("#weatherDesc").text(weatherData.weather[0].description);
@@ -112,7 +112,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							var weatherData=JSON.parse(jsonData2);
 							//console.log(weatherData);
 							$("#temp").text(Math.round(weatherData.main.temp)+"°C");
-							$("#feelsLike").text(Math.round(weatherData.main.feels_like)+"°C");
+							$("#feelsLike").text("feels like "+Math.round(weatherData.main.feels_like)+"°C");
 							$("#city").text(weatherData.name);
 							$("#country").text(weatherData.sys.country);
 							$("#weatherDesc").text(weatherData.weather[0].description);
@@ -164,7 +164,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	<div class="main-agileits">
 		<h1>Weather</h1>
 		<div>
-			<form class="form-inline my-2 my-lg-0 form-signin" action="" method="POST">
+			<form class="form-inline my-2 my-lg-0 form-signin" action="#" method="POST">
 				<input id="cityName" class="form-control mr-sm-2" type="text" placeholder="City" aria-label="City" required autocomplete="off">
 				<button id="searchCity" class="btn btn-primary my-2 my-sm-0" type="button">Go</button>
 			  </form>
@@ -175,10 +175,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<p><span id="day"></span></p>
 					<p><span id="date"></span></p>
 				</div>
-				<h2 id="temp">14°C</h2>
+				<h2 id="temp"></h2>
 				<div>
-					<p style="color: white;">feels like&nbsp;<span id="feelsLike"></span></p>
-					<img style="height: 50px; width: 50px; display: inline-block;" id="imgIcon" src="" alt="" />
+					<p style="color: white;"><span id="feelsLike"></span></p>
+					<img style="height: 50px; width: 50px; display: inline-block;" id="imgIcon" src="" alt="no-img" />
 					<p style="color: white; margin-top: 0;" id="weatherDesc"></p>
 				</div>
 				<h3><span id="city"></span>,&nbsp;<span id="country"></span></h3>	 
