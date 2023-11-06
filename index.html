@@ -34,14 +34,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				var apiKey="ff7ff3b2df3d78bd304b966c710c85c3";
 				var unit="metric";
 				var coord="";
-				$("#owl-demo").owlCarousel({ 
-				autoPlay: 3000, //Set AutoPlay to 3 seconds
+				//$("#owl-demo").owlCarousel({ 
+				//autoPlay: 3000, //Set AutoPlay to 3 seconds
 			
-				items : 3,
-				itemsDesktop : [768,3],
-				itemsDesktopSmall : [414,4]
+				//items : 3,
+				//itemsDesktop : [768,3],
+				//itemsDesktopSmall : [414,4]
 
-				});
+				//});
 
 				$.ajax({
 					url: "https://geolocation-db.com/json/",
@@ -61,7 +61,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								var weatherData=JSON.parse(jsonData1);
 								//console.log(weatherData);
 								$("#temp").text(Math.round(weatherData.main.temp)+"°C");
-								$("#feelsLike").text(Math.round(weatherData.main.feels_like)+"°C");
+								$("#feelsLike").text("feels like "+Math.round(weatherData.main.feels_like)+"°C");
 								$("#city").text(weatherData.name);
 								$("#country").text(weatherData.sys.country);
 								$("#weatherDesc").text(weatherData.weather[0].description);
@@ -112,7 +112,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							var weatherData=JSON.parse(jsonData2);
 							//console.log(weatherData);
 							$("#temp").text(Math.round(weatherData.main.temp)+"°C");
-							$("#feelsLike").text(Math.round(weatherData.main.feels_like)+"°C");
+							$("#feelsLike").text("feels like "+Math.round(weatherData.main.feels_like)+"°C");
 							$("#city").text(weatherData.name);
 							$("#country").text(weatherData.sys.country);
 							$("#weatherDesc").text(weatherData.weather[0].description);
@@ -175,10 +175,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<p><span id="day"></span></p>
 					<p><span id="date"></span></p>
 				</div>
-				<h2 id="temp">14°C</h2>
+				<h2 id="temp"></h2>
 				<div>
-					<p style="color: white;">feels like&nbsp;<span id="feelsLike"></span></p>
-					<img style="height: 50px; width: 50px; display: inline-block;" id="imgIcon" src="" alt="" />
+					<p style="color: white;"><span id="feelsLike"></span></p>
+					<img style="height: 50px; width: 50px; display: inline-block;" id="imgIcon" src="" alt="no-img" />
 					<p style="color: white; margin-top: 0;" id="weatherDesc"></p>
 				</div>
 				<h3><span id="city"></span>,&nbsp;<span id="country"></span></h3>	 
