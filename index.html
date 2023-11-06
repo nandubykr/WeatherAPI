@@ -62,7 +62,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								//console.log(weatherData);
 								$("#temp").text(Math.round(weatherData.main.temp)+"°C");
 								$("#feelsLike").text("feels like "+Math.round(weatherData.main.feels_like)+"°C");
-								$("#city").text(weatherData.name);
+								$("#city").text(weatherData.name + ", ");
 								$("#country").text(weatherData.sys.country);
 								$("#weatherDesc").text(weatherData.weather[0].description);
 
@@ -113,7 +113,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							//console.log(weatherData);
 							$("#temp").text(Math.round(weatherData.main.temp)+"°C");
 							$("#feelsLike").text("feels like "+Math.round(weatherData.main.feels_like)+"°C");
-							$("#city").text(weatherData.name);
+							$("#city").text(weatherData.name + ", ");
 							$("#country").text(weatherData.sys.country);
 							$("#weatherDesc").text(weatherData.weather[0].description);
 
@@ -181,7 +181,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<img style="height: 50px; width: 50px; display: inline-block;" id="imgIcon" src="" alt="no-img" />
 					<p style="color: white; margin-top: 0;" id="weatherDesc"></p>
 				</div>
-				<h3><span id="city"></span>,&nbsp;<span id="country"></span></h3>	 
+				<h3><span id="city"></span><span id="country"></span></h3>	 
 			</div>
 			<!-- <div class="w3layouts-slider">
 				<div id="owl-demo" class="owl-carousel owl-theme">
