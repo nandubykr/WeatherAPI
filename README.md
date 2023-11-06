@@ -1,4 +1,4 @@
 # WeatherAPI
-A simple weather API demonstration
+A simple demonstration of consuming weather API
 
-https://shivibykr.github.io/WeatherAPI/
+https://nandubykr.github.io/WeatherAPI/
