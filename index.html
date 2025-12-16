@@ -81,18 +81,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 								coord=weatherData.coord.lat+","+weatherData.coord.lon;
 								console.log(coord);
 								$.ajax({
-									url:"https://dev.virtualearth.net/REST/v1/TimeZone/"+coord+"?&key=AsC1ElsgKQeOUhX-pirfzwkRwiGRJ5mPnv2onzBr2tTLSpsDUPLpZPwb3DlkDz0M",
+									url:"https://timeapi.io/api/time/current/coordinate?latitude="+weatherData.coord.lat+"&longitude="+weatherData.coord.lon,
 									method:"GET",
 									success:function(timeData){
 										var jsonData3=JSON.stringify(timeData);
 										var parsedData=JSON.parse(jsonData3);
 										//console.log(parsedData);
-										var dateString=parsedData.resourceSets[0].resources[0].timeZone.convertedTime.localTime;
-										var dayArray=new Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday");
-										var dayOfWeek=new Date(dateString).getDay();
-										var localDate=new Date(dateString).toLocaleString();
-										$("#day").text(dayArray[dayOfWeek]);
+										var dateString=parsedData.date;
+										console.log(dateString);
+										//var dayArray=new Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday");
+										var dayOfWeek=parsedData.dayOfWeek
+										var localDate=new Date(dateString).toLocaleDateString("en-IN");
+										$("#day").text(dayOfWeek);
+										console.log(dayOfWeek);
 										$("#date").text(localDate);
+										console.log(localDate);
 									}
 
 								});
@@ -132,18 +135,21 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							coord=weatherData.coord.lat+","+weatherData.coord.lon;
 								console.log(coord);
 								$.ajax({
-									url:"https://dev.virtualearth.net/REST/v1/TimeZone/"+coord+"?&key=AsC1ElsgKQeOUhX-pirfzwkRwiGRJ5mPnv2onzBr2tTLSpsDUPLpZPwb3DlkDz0M",
+									url:"https://timeapi.io/api/time/current/coordinate?latitude="+weatherData.coord.lat+"&longitude="+weatherData.coord.lon,
 									method:"GET",
 									success:function(timeData){
 										var jsonData3=JSON.stringify(timeData);
 										var parsedData=JSON.parse(jsonData3);
 										//console.log(parsedData);
-										var dateString=parsedData.resourceSets[0].resources[0].timeZone.convertedTime.localTime;
-										var dayArray=new Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday");
-										var dayOfWeek=new Date(dateString).getDay();
-										var localDate=new Date(dateString).toLocaleString();
-										$("#day").text(dayArray[dayOfWeek]);
+										var dateString=parsedData.date;
+										console.log(dateString);
+										//var dayArray=new Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday");
+										var dayOfWeek=parsedData.dayOfWeek
+										var localDate=new Date(dateString).toLocaleDateString("en-IN");
+										$("#day").text(dayOfWeek);
+										console.log(dayOfWeek);
 										$("#date").text(localDate);
+										console.log(localDate);
 									}
 
 								});
@@ -172,17 +178,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		</div>
 		<div class="main-wthree-row"> 
 			<div class="agileinfo-text"> 
-				<div class="date">
-					<p><span id="day"></span></p>
-					<p><span id="date"></span></p>
-				</div>
 				<h2 id="temp"></h2>
 				<div>
 					<p style="color: white;"><span id="feelsLike"></span></p>
 					<img style="height: 50px; width: 50px; display: inline-block;" id="imgIcon" src="" alt="" />
 					<p style="color: white; margin-top: 0;" id="weatherDesc"></p>
 				</div>
-				<h3><span id="city"></span><span id="country"></span></h3>	 
+				<h3><span id="city"></span><span id="country"></span></h3>
+				<div class="date">
+					<p><span id="day"></span></p>
+					<p><span id="date"></span></p>
+				</div>
+				<!-- <p style="color: white;" id="date">2025-12-16 11:52 AM</p>	  -->
 			</div>
 			<!-- <div class="w3layouts-slider">
 				<div id="owl-demo" class="owl-carousel owl-theme">
