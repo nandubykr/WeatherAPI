@@ -45,7 +45,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				//});
 
 				$.ajax({
-					url: "https://geolocation-db.com/json/",
+					url: "http://ip-api.com/json/",
 					method:"GET",
 					dataType: "json",
 					success: function(location) {
@@ -53,7 +53,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						var locData=JSON.parse(jsonData);
 						//$("#city").text(locData.city);
 						//$("#country").text(locData.country_code);
-						city=locData.city+","+locData.country_code;
+						//city=locData.city+","+locData.country_code;
+						var city = locData.city;
+						console.log(city);
 						$.ajax({
 							url:"https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid="+apiKey+"&units="+unit,
 							method:"GET",
